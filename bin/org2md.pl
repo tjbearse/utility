@@ -1,4 +1,9 @@
 #!/usr/bin/perl
+#
+# org2md.pl
+#
+# simple conversion of .org lists to markdown
+
 
 my $l;
 while($l = <STDIN>){
