@@ -12,3 +12,5 @@ call vundle#end()
 filetype plugin indent on
 
 inoremap jj <Esc>   """ jj key is <Esc> setting
+set shiftwidth=4
+set tabstop=4
