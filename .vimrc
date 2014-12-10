@@ -13,7 +13,8 @@ call vundle#end()
 " end Vundle
 filetype plugin indent on
 
-inoremap jj <Esc>   """ jj key is <Esc> setting
+inoremap jj <Esc>
+""" jj key is <Esc> setting
 
 " indents
 set shiftwidth=4
