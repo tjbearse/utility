@@ -14,7 +14,9 @@ call vundle#end()
 filetype plugin indent on
 
 inoremap jj <Esc>
-""" jj key is <Esc> setting
+
+noremap j gj
+noremap k gk
 
 " indents
 set shiftwidth=4
