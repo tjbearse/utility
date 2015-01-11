@@ -21,7 +21,7 @@ noremap k gk
 " indents
 set shiftwidth=4
 set tabstop=4
-set cindent
+set noexpandtab
 
 set hlsearch " makes highlight show up on search
 
