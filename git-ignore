@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# git-ignore
+#
+# if no arguments displays .gitignore using less
+# if arguments supplied adds them to .gitignore (if not already present)
+
+status=0
+
+if [ $# == 0 ]
+then
+    if [ -e ".gitignore" ]
+    then less .gitignore
+    else
+	echo ".gitignore does not exist"
+	status=1
+    fi
+    exit
+fi
+
+if ! [ -e ".gitignore" ]
+then
+    echo ".gitignore does not exist"
+    while true; do
+    read -p "Do you want to add a .gitignore? " yn
+    case $yn in
+        [Yy]* ) touch .gitignore; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+    done
+fi
+
+for path in "$@"
+do
+    if ! grep -qxF "$path" .gitignore
+    then
+	echo "$path" >> .gitignore
+    fi
+done
+
+exit $status
