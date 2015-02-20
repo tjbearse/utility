@@ -13,6 +13,6 @@ set noexpandtab
 
 set hlsearch " makes highlight show up on search
 "set list
-"set listchars=tab:·\ "makes tabs show as "·    "
+set listchars=tab:·\ "makes tabs show as "·    "
 
 colorscheme desert
