@@ -1,8 +1,6 @@
 [user]
 	email = bearse.thomas@gmail.com
 	name = TJ
-[push]
-	default = simple
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
