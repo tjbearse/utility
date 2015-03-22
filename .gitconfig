@@ -3,6 +3,6 @@
 	name = TJ
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
+	excludesfile = /home/tj/.gitignore_global
 [color]
 	ui = true
