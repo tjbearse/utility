@@ -15,6 +15,6 @@ export CAEN="login.engin.umich.edu"
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 # If not running run tmux
-[[ -z "$TMUX" ]] && tmux
+[[ -z "$TMUX" ]] && exec tmux
 
 export PYTHONSTARTUP=~/.pythonrc
