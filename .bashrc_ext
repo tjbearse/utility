@@ -16,3 +16,5 @@ export CAEN="login.engin.umich.edu"
 [[ $- != *i* ]] && return
 # If not running run tmux
 [[ -z "$TMUX" ]] && tmux
+
+export PYTHONSTARTUP=~/.pythonrc
