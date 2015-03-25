@@ -1,0 +1,20 @@
+# ~/.bashrc_ext: executed by .bashrc
+# holds some personlizations separated for portablility
+
+#common aliases
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+PS1="\h$ "
+
+export CAEN="login.engin.umich.edu"
+
+# If not running interactively, do not do anything
+[[ $- != *i* ]] && return
+# If not running run tmux
+[[ -z "$TMUX" ]] && exec tmux
+
+export PYTHONSTARTUP=~/.pythonrc

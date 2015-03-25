@@ -1,0 +1,10 @@
+[user]
+	email = bearse.thomas@gmail.com
+	name = TJ
+[push]
+	default = simple
+[core]
+	editor = vim
+	excludesfile = /home/tj/.gitignore_global
+[color]
+	ui = true
