@@ -12,7 +12,7 @@ PS1="\h$ "
 
 export CAEN="login.engin.umich.edu"
 
+export PYTHONSTARTUP=~/.pythonrc
+
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
-
-export PYTHONSTARTUP=~/.pythonrc
