@@ -3,8 +3,22 @@
 #
 # pulls useful repos
 
-cd $HOME
-git clone git@github.com:tjbearse/bin.git
-cd 'bin'
+install_dir="$PWD/$(dirname -- "$0")"
+
+# setup bin
+(cd $HOME
+if [ ! -d "bin" ]; then
+	git clone git@github.com:tjbearse/bin.git
+	cd 'bin'
+	git submodule init
+	git submodule update
+else
+	echo "bin already exists"
+fi)
+
+
+# setup prompt
+(cd install_dir
 git submodule init
 git submodule update
+)

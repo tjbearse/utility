@@ -8,8 +8,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-PS1="\h$ "
-
 export CAEN="login.engin.umich.edu"
 
 export PYTHONSTARTUP=~/.pythonrc
