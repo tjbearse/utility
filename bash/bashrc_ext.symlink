@@ -12,6 +12,8 @@ export CAEN="login.engin.umich.edu"
 
 export PYTHONSTARTUP=~/.pythonrc
 
+source ~/.bash_prompt
+
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 # If not running run tmux

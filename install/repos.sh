@@ -18,7 +18,7 @@ fi)
 
 
 # setup prompt
-(cd install_dir
+echo $(cd $install_dir
 git submodule init
 git submodule update
 )
