@@ -17,11 +17,14 @@ export PYTHONSTARTUP=~/.pythonrc
 [[ $- != *i* ]] && return
 
 # prompt
+PS1_START="${BrightBlackFg}\w${ResetColor}"
+PS1_END="${ResetColor}\u ${BlueBg}${BoldYellowFg}\$${ResetColor} "
+PS1="$PS1_START\n$PS1_END"
+
 GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_FETCH_REMOTE_STATUS=0
-GIT_PROMPT_START_USER="\n\w"
-GIT_PROMPT_END_USER="${ResetColor}\n\u ${BlueBg}${BoldYellowFg}\$${ResetColor} "
-PS1="$GIT_PROMPT_START_USER$GIT_PROMPT_END_USER"
+GIT_PROMPT_START_USER="\n$PS1_START\n"
+GIT_PROMPT_END_USER="\n$PS1_END"
 source ~/.bash_prompt
 
 # If not running run tmux
