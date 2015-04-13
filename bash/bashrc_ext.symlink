@@ -10,11 +10,19 @@ alias l='ls -CF'
 
 export CAEN="login.engin.umich.edu"
 
+# python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
-
-source ~/.bash_prompt
 
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
+
+# prompt
+GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_FETCH_REMOTE_STATUS=0
+GIT_PROMPT_START_USER="\n\w"
+GIT_PROMPT_END_USER="${ResetColor}\n\u ${BlueBg}${BoldYellowFg}\$${ResetColor} "
+PS1="$GIT_PROMPT_START_USER$GIT_PROMPT_END_USER"
+source ~/.bash_prompt
+
 # If not running run tmux
 [[ -z "$TMUX" ]] && exec tmux
