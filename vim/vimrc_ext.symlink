@@ -5,6 +5,7 @@ inoremap jj <Esc>
 
 noremap j gj
 noremap k gk
+set backspace=indent,eol,start
 
 " indents
 set shiftwidth=4
@@ -12,7 +13,67 @@ set tabstop=4
 set noexpandtab
 
 set hlsearch " makes highlight show up on search
-"set list
+set list
 set listchars=tab:·\ "makes tabs show as "·    "
+hi SpecialKey ctermfg=gray guifg=gray
+
+syntax on
+set number
+set relativenumber " http://vim.wikia.com/wiki/Display_line_numbers
 
 colorscheme desert
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
+hi Folded guibg=grey20 guifg=grey50
+
+set nocompatible " be iMproved, required
+filetype off " required
+
+set autoread
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"fuzzy file searcher
+Plugin 'kien/ctrlp.vim'
+"file explorer
+Plugin 'scrooloose/nerdtree'
+"search
+Plugin 'rking/ag.vim'
+
+Plugin 'MattesGroeger/vim-bookmarks'
+
+Plugin 'airblade/vim-gitgutter'
+let g:gitgutter_sign_column_always = 1 "avoid gutter popping in and out
+
+Plugin 'easymotion/vim-easymotion'
+
+"project specific settings
+Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'LucHermitte/local_vimrc'
+
+" autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+"Snippets
+"Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
+"Plugin 'matthewsimo/angular-vim-snippets'
+
+"indent
+Plugin 'tpope/vim-sleuth'
+
+call vundle#end()            " required vundle
+filetype plugin indent on    " required vundle
+
+
+let mapleader=" "
+map <leader> <Plug>(easymotion-prefix)
+

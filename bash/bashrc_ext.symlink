@@ -2,13 +2,13 @@
 # holds some personlizations separated for portablility
 
 #common aliases
-alias ls="ls --color=auto"
+#alias ls="ls --color=auto"
 alias grep="grep --color=auto"
+#alias ls="ls -h"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-export CAEN="login.engin.umich.edu"
 
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
@@ -28,4 +28,4 @@ GIT_PROMPT_END_USER="\n$PS1_END"
 source ~/.bash_prompt
 
 # If not running run tmux
-[[ -z "$TMUX" ]] && exec tmux
+#[[ -z "$TMUX" ]] && exec tmux

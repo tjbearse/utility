@@ -1,6 +1,8 @@
 # global git ignore
 
 *.swp
+*.vim
+.agignore
 
 # https://help.github.com/articles/ignoring-files/
 #

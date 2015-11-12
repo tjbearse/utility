@@ -1,10 +1,22 @@
 [user]
 	email = bearse.thomas@gmail.com
-	name = TJ
+	name = TJ Bearse
 [push]
 	default = simple
 [core]
 	editor = vim
-	excludesfile = /home/tj/.gitignore_global
+	excludesfile = /Users/ThomasB/.gitignore_global
 [color]
 	ui = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	cm = commit
