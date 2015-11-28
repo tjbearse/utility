@@ -69,6 +69,7 @@ Plugin 'Valloric/YouCompleteMe'
 
 "indent
 Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()            " required vundle
 filetype plugin indent on    " required vundle
@@ -77,3 +78,9 @@ filetype plugin indent on    " required vundle
 let mapleader=" "
 map <leader> <Plug>(easymotion-prefix)
 
+
+
+" Macros
+" define these commands on a repo basis
+let @b=":Build"
+let @t=":Test"

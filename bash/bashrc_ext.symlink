@@ -16,6 +16,11 @@ export PYTHONSTARTUP=~/.pythonrc
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
+
+
 # prompt
 PS1_START="\[\033[1;30m\]\w\[\033[0;0m\]"
 PS1_END="\[\033[0;0m\]\u \[\033[0;44m\]\[\033[1;33m\]$\[\033[0;0m\] "
