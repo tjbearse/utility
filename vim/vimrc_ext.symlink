@@ -5,6 +5,7 @@ inoremap jj <Esc>
 
 noremap j gj
 noremap k gk
+let mapleader=" "
 set backspace=indent,eol,start
 
 " indents
@@ -14,70 +15,137 @@ set noexpandtab
 
 set hlsearch " makes highlight show up on search
 set list
-set listchars=tab:·\ "makes tabs show as "·    "
-hi SpecialKey ctermfg=gray guifg=gray
+set listchars=tab:·\ ,trail:«"makes tabs show as "·    "
 
 syntax on
 set number
-set relativenumber " http://vim.wikia.com/wiki/Display_line_numbers
+" line numbers are relative to current line, not absolute
+" http://vim.wikia.com/wiki/Display_line_numbers
+set relativenumber
 
-colorscheme desert
-hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
-hi Folded guibg=grey20 guifg=grey50
 
 set nocompatible " be iMproved, required
 filetype off " required
 
 set autoread
+set foldmethod=indent
+set nofoldenable
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'NLKNguyen/papercolor-theme'
+
 "fuzzy file searcher
 Plugin 'kien/ctrlp.vim'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_max_depth=10
+let g:ctrlp_max_files=300
+
 "file explorer
 Plugin 'scrooloose/nerdtree'
+
 "search
 Plugin 'rking/ag.vim'
+" don't take over buffer with first result
+ca Ag Ag!
 
-Plugin 'MattesGroeger/vim-bookmarks'
+"Plugin 'MattesGroeger/vim-bookmarks'
 
 Plugin 'airblade/vim-gitgutter'
-let g:gitgutter_sign_column_always = 1 "avoid gutter popping in and out
+"avoid gutter popping in and out
+let g:gitgutter_sign_column_always = 1
+
+" Git commands (G<something>)
+Plugin 'tpope/vim-fugitive'
+
+" rainbow parens
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 0 "enable it later via :RainbowToggle
+"color needs work here
+let g:rainbow_conf = {
+\	'guifgs': ['darkgreen', 'cyan1'],
+\	'ctermfgs': ['lightyellow'],
+\	'operators': 0,
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
+\}
 
 Plugin 'easymotion/vim-easymotion'
+map <leader> <Plug>(easymotion-prefix)
+
+Plugin 'terryma/vim-multiple-cursors'
+" binds to <C-n>, use v after selection
+
+" this works well but auto line wraps
+Plugin 'jiangmiao/auto-pairs'
+" unmatched close jumps to next close, <c-v>} will avoid
+let g:AutoPairsFlyMode = 1
+" let g:AutoPairsShortcutBackInsert = '<M-b>' "this doesn't work in macVim,
+" need to remap
+" Default: {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+let g:AutoPairs ={
+\ '(':')',
+\ '[':']',
+\ '{':'}',
+\ "'":"'",
+\ '"':'"',
+\ '<':'>'
+\}
+let g:AutoPairsCenterLine = 0
+
+"cs<before><after>: change
+"ys<where><after>: add
+"ds<what>: delete
+":help surround
+Plugin 'tpope/vim-surround'
 
 "project specific settings
+" these are in separate _vimrc_local.vim files
 Plugin 'LucHermitte/lh-vim-lib'
 Plugin 'LucHermitte/local_vimrc'
 
-" autocomplete
-Plugin 'Valloric/YouCompleteMe'
-
-"Snippets
+" this is not playing nice with YMC
 "Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 "Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<c-tab>" "avoid conflict with YouCompleteMe
+"let g:UltiSnipsListSnippets="<c-`>" "avoid conflict with YouCompleteMe
+"let g:UltiSnipsJumpForwardTrigger="<c-tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-f>"
 " If you want :UltiSnipsEdit to split your window.
 "let g:UltiSnipsEditSplit="vertical"
 "Plugin 'matthewsimo/angular-vim-snippets'
 
-"indent
+" autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+" figure out indent settings
 Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-fugitive'
+
+" this causes issues with Ag over quickfix buffer
+" js specific
+" Plugin 'wookiehangover/jshint.vim'
+" otherwise breaks Ag
+" let g:JSHintUpdateWriteOnly=1
+
+" Js formatting
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+" below is not being set/overridden
+" autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 
 call vundle#end()            " required vundle
 filetype plugin indent on    " required vundle
 
-
-let mapleader=" "
-map <leader> <Plug>(easymotion-prefix)
-
+set background=dark
+colorscheme PaperColor
+"hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
+hi Folded guibg=grey20 guifg=grey50
+hi SpecialKey ctermfg=gray guifg=gray
 
 
 " Macros
