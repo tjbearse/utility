@@ -9,6 +9,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias mvim='open -a MacVim'
+alias qfind='find . -iname'
 
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc

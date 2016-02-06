@@ -1,4 +1,3 @@
-" holds config common to vim and ideavim
 filetype plugin indent on
 
 inoremap jj <Esc>
@@ -67,11 +66,16 @@ Plugin 'luochen1990/rainbow'
 let g:rainbow_active = 0 "enable it later via :RainbowToggle
 "color needs work here
 let g:rainbow_conf = {
-\	'guifgs': ['darkgreen', 'cyan1'],
+\	'guifgs': ['RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3',
+\ 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3',
+\ 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3',
+\ 'firebrick3'],
 \	'ctermfgs': ['lightyellow'],
 \	'operators': 0,
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
 \}
+
+"could add vim-css-color
 
 Plugin 'easymotion/vim-easymotion'
 map <leader> <Plug>(easymotion-prefix)
@@ -80,9 +84,9 @@ Plugin 'terryma/vim-multiple-cursors'
 " binds to <C-n>, use v after selection
 
 " this works well but auto line wraps
-Plugin 'jiangmiao/auto-pairs'
+"Plugin 'jiangmiao/auto-pairs'
 " unmatched close jumps to next close, <c-v>} will avoid
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0 " this works when you don't want it to
 " let g:AutoPairsShortcutBackInsert = '<M-b>' "this doesn't work in macVim,
 " need to remap
 " Default: {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
@@ -92,7 +96,6 @@ let g:AutoPairs ={
 \ '{':'}',
 \ "'":"'",
 \ '"':'"',
-\ '<':'>'
 \}
 let g:AutoPairsCenterLine = 0
 
@@ -125,16 +128,15 @@ Plugin 'Valloric/YouCompleteMe'
 " figure out indent settings
 Plugin 'tpope/vim-sleuth'
 
-" this causes issues with Ag over quickfix buffer
-" js specific
-" Plugin 'wookiehangover/jshint.vim'
-" otherwise breaks Ag
-" let g:JSHintUpdateWriteOnly=1
+Plugin 'Shutnik/jshint2.vim'
+let jshint2_save = 1
 
 " Js formatting
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'einars/js-beautify'
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer>  <c-f> :call RangeHtmlBeautify()<cr>
 " below is not being set/overridden
 " autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 
@@ -143,12 +145,14 @@ filetype plugin indent on    " required vundle
 
 set background=dark
 colorscheme PaperColor
-"hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
-hi Folded guibg=grey20 guifg=grey50
-hi SpecialKey ctermfg=gray guifg=gray
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
+hi Folded guibg=grey10 guifg=grey50
+hi SpecialKey ctermfg=darkgray guifg=gray35
 
 
 " Macros
 " define these commands on a repo basis
-let @b=":Build"
-let @t=":Test"
+let @b=":Build"
+let @t=":Test"
+
+let @r=":! %"
