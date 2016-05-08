@@ -22,6 +22,8 @@ if [ -f ~/.git-completion.bash ]; then
   source ~/.git-completion.bash
 fi
 
+# should cd to current directory with -c or something
+EDITOR=vim
 
 # prompt
 PS1_START="\[\033[1;30m\]\w\[\033[0;0m\]"

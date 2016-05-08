@@ -4,6 +4,11 @@
 *.vim
 .agignore
 
+*.txt
+
+# put personal scripts in this folder
+myscripts/*
+
 # https://help.github.com/articles/ignoring-files/
 #
 # Compiled source #

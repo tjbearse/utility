@@ -29,6 +29,7 @@ filetype off " required
 set autoread
 set foldmethod=indent
 set nofoldenable
+au BufRead *.txt setlocal spell
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -75,7 +76,7 @@ let g:rainbow_conf = {
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
 \}
 
-"could add vim-css-color
+Plugin 'ap/vim-css-color'
 
 Plugin 'easymotion/vim-easymotion'
 map <leader> <Plug>(easymotion-prefix)
@@ -110,26 +111,30 @@ Plugin 'tpope/vim-surround'
 Plugin 'LucHermitte/lh-vim-lib'
 Plugin 'LucHermitte/local_vimrc'
 
+Bundle 'ervandew/supertab'
+
 " this is not playing nice with YMC
-"Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
-"let g:UltiSnipsExpandTrigger="<c-tab>" "avoid conflict with YouCompleteMe
-"let g:UltiSnipsListSnippets="<c-`>" "avoid conflict with YouCompleteMe
-"let g:UltiSnipsJumpForwardTrigger="<c-tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-f>"
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
+Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets' " bring these in one at a time
 "Plugin 'matthewsimo/angular-vim-snippets'
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " autocomplete
 Plugin 'Valloric/YouCompleteMe'
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " figure out indent settings
 Plugin 'tpope/vim-sleuth'
 
 Plugin 'Shutnik/jshint2.vim'
 let jshint2_save = 1
+let jshint2_command = '/usr/local/bin/jshint'
 
 " Js formatting
 Plugin 'maksimr/vim-jsbeautify'
