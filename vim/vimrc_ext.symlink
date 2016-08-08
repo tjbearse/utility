@@ -22,6 +22,12 @@ set number
 " http://vim.wikia.com/wiki/Display_line_numbers
 set relativenumber
 
+set laststatus=2
+
+map - 10<C-w>-
+map _ 10<C-w>+
+map = 10<C-w><
+map + 10<C-w>>
 
 set nocompatible " be iMproved, required
 filetype off " required
@@ -80,6 +86,13 @@ Plugin 'ap/vim-css-color'
 
 Plugin 'easymotion/vim-easymotion'
 map <leader> <Plug>(easymotion-prefix)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
+map W <leader>w
+map B <leader>b
+map E <leader>e
 
 Plugin 'terryma/vim-multiple-cursors'
 " binds to <C-n>, use v after selection
