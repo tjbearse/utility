@@ -24,6 +24,13 @@ if [ -f ~/.git-completion.bash ]; then
 	source ~/.git-completion.bash
 fi
 
+up() {
+	path=$(git rev-parse --show-toplevel);
+	if [ $? == 0 ]; then
+		cd $path
+	fi
+}
+
 # should cd to current directory with -c or something
 EDITOR=vim
 
