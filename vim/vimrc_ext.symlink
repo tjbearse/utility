@@ -28,6 +28,8 @@ map - 10<C-w>-
 map _ 10<C-w>+
 map = 10<C-w><
 map + 10<C-w>>
+set splitbelow
+set splitright
 
 set nocompatible " be iMproved, required
 filetype off " required
@@ -174,3 +176,4 @@ let @b=":Build"
 let @t=":Test"
 
 let @r=":! %"
+let @q='I"A",'
