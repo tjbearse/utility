@@ -9,6 +9,8 @@
 # put personal scripts in this folder
 myscripts/*
 
+venv/*
+
 # https://help.github.com/articles/ignoring-files/
 #
 # Compiled source #
