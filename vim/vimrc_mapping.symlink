@@ -1,0 +1,32 @@
+inoremap jj <Esc>
+
+noremap j gj
+noremap k gk
+
+inoremap <c-s> <Esc>:wq
+noremap <c-s> <Esc>:wq
+
+set backspace=indent,eol,start
+
+let mapleader=" "
+
+map - 10<C-w>-
+map _ 10<C-w>+
+map = 10<C-w><
+map + 10<C-w>>
+
+map <leader> <Plug>(easymotion-prefix)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
+map W <leader>w
+map B <leader>b
+map E <leader>e
+
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer>  <c-f> :call RangeHtmlBeautify()<cr>
+
+let @r=":! %"
+let @q='I"A",'
+

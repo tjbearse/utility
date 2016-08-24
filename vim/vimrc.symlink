@@ -1,4 +1,112 @@
-set nocompatible
-filetype off
+filetype plugin indent on
+set nocompatible " be iMproved, required
+filetype off " required
 
-source ~/.vimrc_ext
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+set splitbelow
+set splitright
+
+""" Auto things
+set autoread
+set foldmethod=indent
+set nofoldenable
+au BufRead *.txt setlocal spell
+
+" don't take over buffer with first result
+ca Ag Ag!
+
+
+
+"fuzzy file searcher
+Plugin 'kien/ctrlp.vim'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_max_depth=10
+let g:ctrlp_max_files=300
+
+"file explorer
+Plugin 'scrooloose/nerdtree'
+
+"search
+Plugin 'rking/ag.vim'
+"Plugin 'MattesGroeger/vim-bookmarks'
+
+Plugin 'airblade/vim-gitgutter'
+"avoid gutter popping in and out
+let g:gitgutter_sign_column_always = 1
+
+" Git commands (G<something>)
+Plugin 'tpope/vim-fugitive'
+
+" rainbow parens
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 0 "enable it later via :RainbowToggle
+"color needs work here
+let g:rainbow_conf = {
+\	'guifgs': ['RoyalBlue3', 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3',
+\ 'SeaGreen3', 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3',
+\ 'DarkOrchid3', 'firebrick3', 'RoyalBlue3', 'SeaGreen3', 'DarkOrchid3',
+\ 'firebrick3'],
+\	'ctermfgs': ['lightyellow'],
+\	'operators': 0,
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold']
+\}
+
+Plugin 'ap/vim-css-color'
+
+Plugin 'easymotion/vim-easymotion'
+
+"project specific settings
+" these are in separate _vimrc_local.vim files
+Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'LucHermitte/local_vimrc'
+
+Bundle 'ervandew/supertab'
+
+Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets' " bring these in one at a time
+"Plugin 'matthewsimo/angular-vim-snippets'
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" indents
+set shiftwidth=4
+set tabstop=4
+set noexpandtab
+Plugin 'tpope/vim-sleuth' " indent
+
+
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+Plugin 'scrooloose/syntastic'
+"" suggested starters
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"" end suggestions
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Js formatting
+Plugin 'maksimr/vim-jsbeautify'
+
+
+source ~/.vimrc_visual
+source ~/.vimrc_mapping
+
+call vundle#end()            " required vundle
+filetype plugin indent on    " required vundle
+
