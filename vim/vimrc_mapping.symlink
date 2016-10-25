@@ -30,3 +30,4 @@ autocmd FileType html vnoremap <buffer>  <c-f> :call RangeHtmlBeautify()<cr>
 let @r=":! %"
 let @q='I"A",'
 
+map <leader><c-p> <Esc>:CtrlPClearCache:CtrlP

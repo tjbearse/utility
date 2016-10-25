@@ -2,22 +2,23 @@ set hlsearch " makes highlight show up on search
 set list
 set listchars=tab:·\ ,trail:«"makes tabs show as "·    "
 
-syntax on
+"syntax on
 set number
 " line numbers are relative to current line, not absolute
 " http://vim.wikia.com/wiki/Display_line_numbers
 set relativenumber
 
+set laststatus=2
+
 Plugin 'vim-airline/vim-airline'
 Plugin 'sunuslee/vim-plugin-random-colorscheme-picker'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'jelera/vim-javascript-syntax'
+"Plugin 'StanAngeloff/php.vim'
 
-set background=dark
+"set background=dark
 "colorscheme obsidian2
 hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
 hi Folded guibg=grey10 guifg=grey50
 hi SpecialKey ctermfg=darkgray guifg=gray35
 highlight Cursor guifg=white guibg=gray
 highlight iCursor guifg=white guibg=gray
-

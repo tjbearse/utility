@@ -6,6 +6,7 @@ filetype off " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Bundle 'gmarik/vundle'
 
 set splitbelow
 set splitright
@@ -16,25 +17,24 @@ set foldmethod=indent
 set nofoldenable
 au BufRead *.txt setlocal spell
 
-" don't take over buffer with first result
-ca Ag Ag!
+set directory=$HOME/.vim/swapfiles//
+
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_max_depth=20
+let g:ctrlp_max_files=400
+let g:ctrlp_working_path_mode = 'ra'
 
 
-
-"fuzzy file searcher
-Plugin 'kien/ctrlp.vim'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-let g:ctrlp_max_depth=10
-let g:ctrlp_max_files=300
-
-"file explorer
 Plugin 'scrooloose/nerdtree'
+Plugin 'mileszs/ack.vim'
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+"ca Ack Ack!
+cnoreabbrev ag Ack!
+cnoreabbrev Ag Ack!
 
-"search
-Plugin 'rking/ag.vim'
-"Plugin 'MattesGroeger/vim-bookmarks'
 
 Plugin 'airblade/vim-gitgutter'
 "avoid gutter popping in and out
@@ -69,8 +69,6 @@ Plugin 'LucHermitte/local_vimrc'
 Bundle 'ervandew/supertab'
 
 Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets' " bring these in one at a time
-"Plugin 'matthewsimo/angular-vim-snippets'
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -88,8 +86,8 @@ set noexpandtab
 Plugin 'tpope/vim-sleuth' " indent
 
 
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 Plugin 'scrooloose/syntastic'
 "" suggested starters
@@ -98,7 +96,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "" end suggestions
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Js formatting
 Plugin 'maksimr/vim-jsbeautify'
@@ -109,4 +107,4 @@ source ~/.vimrc_mapping
 
 call vundle#end()            " required vundle
 filetype plugin indent on    " required vundle
-
+syntax on
