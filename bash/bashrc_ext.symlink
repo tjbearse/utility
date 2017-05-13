@@ -14,6 +14,9 @@ alias chrome='open -a Google\ Chrome'
 alias qfind='find . -iname'
 alias qdate='date +%Y-%m-%d'
 
+alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-time.txt)" -o /dev/null'
+alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
+
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
 
@@ -30,6 +33,7 @@ up() {
 		cd $path
 	fi
 }
+
 
 # should cd to current directory with -c or something
 EDITOR=vim

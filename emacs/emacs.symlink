@@ -1,17 +1,82 @@
+(package-initialize)
+
+(require 'package)
+
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
+(setq inhibit-splash-screen t
+    inhibit-startup-message t
+    inhibit-startup-echo-area-message t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+        (package-install 'use-package))
+
+(eval-when-compile
+    (require 'use-package))
+(when (boundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+(show-paren-mode 1)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+(setq-default left-fringe-width nil)
+(setq-default indicate-empty-lines t)
+(setq-default indent-tabs-mode nil)
+
+(setq backup-directory-alist
+    `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+    `((".*" ,temporary-file-directory t)))
+
+(use-package evil
+    :ensure t
+    :config
+    (dolist (mode '(ag-mode
+	flycheck-error-list-mode
+	git-rebase-mode))
+    (add-to-list 'evil-emacs-state-modes mode))
+
+    (evil-mode 1)
+) 
+
+(use-package powerline
+    :ensure t
+    :config
+    (powerline-default-theme)
+    )
+
+(use-package rainbow-mode :ensure t)
+(use-package css-mode :ensure t)
+
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :commands helm-mode
+  :config
+  (helm-mode 1)
+  ;;(setq helm-buffers-fuzzy-matching t)
+  (setq helm-autoresize-mode t)
+  (setq helm-buffer-max-length 40)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  )
+
+(use-package exec-path-from-shell
+  :ensure t
+  :defer t
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(electric-indent-mode t)
- '(global-linum-mode t)
- '(inhibit-startup-buffer-menu t)
- '(inhibit-startup-echo-area-message "tj")
- '(inhibit-startup-screen t)
- '(line-number-mode t)
- '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "INSTRUCTIONS")))
- '(org-startup-indented t)
- '(show-paren-mode t)
+ '(package-selected-packages (quote (use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

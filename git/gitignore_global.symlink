@@ -3,6 +3,9 @@
 *.swp
 *.vim
 .agignore
+.node-version
+bower_components
+node_modules
 
 *.txt
 

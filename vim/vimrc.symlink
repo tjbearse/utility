@@ -61,11 +61,6 @@ Plugin 'ap/vim-css-color'
 
 Plugin 'easymotion/vim-easymotion'
 
-"project specific settings
-" these are in separate _vimrc_local.vim files
-Plugin 'LucHermitte/lh-vim-lib'
-Plugin 'LucHermitte/local_vimrc'
-
 Bundle 'ervandew/supertab'
 
 Plugin 'SirVer/ultisnips'
@@ -87,6 +82,7 @@ Plugin 'tpope/vim-sleuth' " indent
 
 
 Plugin 'pangloss/vim-javascript'
+Plugin 'fatih/vim-go'
 Plugin 'mxw/vim-jsx'
 
 Plugin 'scrooloose/syntastic'
@@ -97,13 +93,28 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "" end suggestions
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_go_check_on_open = 0
+let g:syntastic_go_checkers = ['go', 'gofmt', 'govet']
+let g:syntastic_html_checkers=[]
 
 " Js formatting
 Plugin 'maksimr/vim-jsbeautify'
 
+Plugin 'chrisbra/csv.vim'
+Plugin 'kshenoy/vim-signature'
 
 source ~/.vimrc_visual
 source ~/.vimrc_mapping
+
+function! FindConfig(prefix, what, where)
+	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+	return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
+
+autocmd FileType javascript let b:syntastic_javascript_jhint_args = 
+			\ get(g:, 'syntastic_javascript_jhint_args', '') .
+			\ FindConfig('-c', '.jshintrc', expand('<afile>:p:h', 1))
 
 call vundle#end()            " required vundle
 filetype plugin indent on    " required vundle

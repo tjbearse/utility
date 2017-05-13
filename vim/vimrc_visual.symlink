@@ -11,8 +11,9 @@ set relativenumber
 set laststatus=2
 
 Plugin 'vim-airline/vim-airline'
-Plugin 'sunuslee/vim-plugin-random-colorscheme-picker'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'sunuslee/vim-plugin-random-colorscheme-picker'
 "Plugin 'StanAngeloff/php.vim'
 
 "set background=dark
