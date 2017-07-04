@@ -11,6 +11,7 @@ node_modules
 
 # put personal scripts in this folder
 myscripts/*
+_*.sh
 
 venv/*
 
