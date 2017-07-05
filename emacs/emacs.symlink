@@ -74,10 +74,18 @@
   (global-set-key (kbd "M-x") #'helm-M-x)
   )
 
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1)
+  (setq yas-snippet-dirs
+        "~/.my-config/emacs/snippets")
+  )
+
 ; fuzzy file finding, needs more ignores, doesn't respect .gitignore
 (use-package fiplr
   :ensure t
-  :disabled t
+  ;:disabled t
   :config
   (global-set-key (kbd "C-x f") 'fiplr-find-file)
   )
