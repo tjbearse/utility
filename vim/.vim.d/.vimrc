@@ -104,8 +104,8 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'chrisbra/csv.vim'
 Plugin 'kshenoy/vim-signature'
 
-source ~/.vimrc_visual
-source ~/.vimrc_mapping
+source .vim.d/.vimrc_visual
+source .vim.d/.vimrc_mapping
 
 function! FindConfig(prefix, what, where)
 	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
