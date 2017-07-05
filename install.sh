@@ -5,7 +5,7 @@ cd $install_dir
 
 stow bash
 stow emacs
-#stow git
+stow git
 #stow python
 #stow tmux
 #stow vim
