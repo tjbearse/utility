@@ -61,6 +61,7 @@ Auto indent and minimize bullets
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :config
   (global-flycheck-mode)
   (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
@@ -127,7 +128,7 @@ Auto indent and minimize bullets
 (use-package css-mode :ensure t)
 (use-package web-mode :ensure t)
 #+END_SRC
-* ETC
+* key binding
 #+BEGIN_SRC emacs-lisp
 (use-package key-chord
   :ensure t
@@ -137,9 +138,21 @@ Auto indent and minimize bullets
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-mode 1)
 )
+(use-package god-mode
+:ensure t
+)
+(use-package evil-god-state
+:ensure t
+:config
+(evil-define-key 'normal global-map (kbd "SPC") 'evil-execute-in-god-state)
+)
+#+END_SRC
+* ETC
+#+BEGIN_SRC emacs-lisp
 
 (use-package yasnippet
   :ensure t
+  :diminish yas-mode
   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs
@@ -173,3 +186,5 @@ Auto indent and minimize bullets
  )
 #+END_SRC
   
+  
+
