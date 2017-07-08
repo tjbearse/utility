@@ -32,9 +32,8 @@
 #+END_SRC
 *** Whitesapce
 #+BEGIN_SRC emacs-lisp
-(setq whitespace-style
-  (quote (face trailing tabs empty)))
-(global-whitespace-toggle-options)
+;(setq whitespace-style (quote (face trailing tabs empty)))
+;(global-whitespace-toggle-options)
 #+END_SRC
 
 ** Displays
