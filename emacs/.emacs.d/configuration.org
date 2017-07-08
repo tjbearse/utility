@@ -29,8 +29,14 @@
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 (setq-default left-fringe-width nil)
 (setq-default indicate-empty-lines t)
-(setq-default indent-tabs-mode nil)
 #+END_SRC
+*** Whitesapce
+#+BEGIN_SRC emacs-lisp
+(setq whitespace-style
+  (quote (face trailing tabs empty)))
+(global-whitespace-toggle-options)
+#+END_SRC
+
 ** Displays
 #+BEGIN_SRC emacs-lisp
 (use-package powerline
@@ -52,10 +58,35 @@
 #+BEGIN_SRC emacs-lisp
 (setq org-src-fontify-natively t)
 #+END_SRC
+** run all kinds of code
+   [[http://orgmode.org/manual/Languages.html][languages list]]
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+      'org-babel-load-languages
+      '(
+        (python . t)
+        (dot . t)
+        (css . t)
+        (calc . t)
+        (js . t)
+        (org . t)
+        (perl . t)
+        (sh . t)
+))
+#+END_SRC
+*** test
+
 ** Visual Settings
 Auto indent and minimize bullets
 #+BEGIN_SRC emacs-lisp
-(org-indent-mode)
+(setq org-startup-indented t)
+#+END_SRC
+* Indentation
+#+BEGIN_SRC emacs-lisp
+(setq tab-width 4)
+(setq js-indent-level 4)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 #+END_SRC
 * Linting
 #+BEGIN_SRC emacs-lisp
@@ -120,6 +151,8 @@ Auto indent and minimize bullets
   ;:disabled t
   :config
   (global-set-key (kbd "C-x f") 'fiplr-find-file)
+  (setq fiplr-ignored-globs '((directories (".git" "node_modules" "bower_components"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
   )
 #+END_SRC
 * Web
@@ -130,6 +163,7 @@ Auto indent and minimize bullets
 #+END_SRC
 * key binding
 #+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode t)
 (use-package key-chord
   :ensure t
   :config
@@ -166,6 +200,7 @@ Auto indent and minimize bullets
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize))
   )
+
 
 
 
