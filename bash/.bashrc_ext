@@ -17,6 +17,8 @@ alias qdate='date +%Y-%m-%d'
 alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 
+alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
+
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
 
