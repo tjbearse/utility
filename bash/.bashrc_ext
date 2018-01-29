@@ -18,6 +18,7 @@ alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-ti
 alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 
 alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
+alias ec='emacsclient -n'
 
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
@@ -35,6 +36,7 @@ up() {
 		cd $path
 	fi
 }
+export FZF_DEFAULT_COMMAND='rg "." --hidden --follow -l --color=never -g ""'
 
 
 # should cd to current directory with -c or something

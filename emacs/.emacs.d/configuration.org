@@ -3,13 +3,12 @@
 * Package Manager (use-package)
 #+BEGIN_SRC emacs-lisp
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (unless (package-installed-p 'use-package)
     (package-refresh-contents)
         (package-install 'use-package))
-
 (eval-when-compile
     (require 'use-package))
 #+END_SRC
@@ -79,6 +78,7 @@
 Auto indent and minimize bullets
 #+BEGIN_SRC emacs-lisp
 (setq org-startup-indented t)
+(use-package ox-twbs :ensure t)
 #+END_SRC
 ** Misc
 Add the custom drawername "DRAWER"
@@ -135,6 +135,10 @@ Add the custom drawername "DRAWER"
     (evil-mode 1)
 )
 #+END_SRC
+** Disable clipboard on select
+#+BEGIN_SRC emacs-lisp
+    (setq x-select-enable-clipboard nil)
+#+END_SRC
 * File Finding
 #+BEGIN_SRC emacs-lisp
 (use-package helm
@@ -188,6 +192,9 @@ Add the custom drawername "DRAWER"
 #+END_SRC
 * ETC
 #+BEGIN_SRC emacs-lisp
+(use-package go-mode
+:ensure t
+)
 
 (use-package yasnippet
   :ensure t
