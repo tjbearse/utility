@@ -17,6 +17,8 @@ alias qdate='date +%Y-%m-%d'
 alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 
+alias ec='emacsclient'
+
 alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
 
 # python autocomplete
@@ -38,7 +40,8 @@ up() {
 
 
 # should cd to current directory with -c or something
-EDITOR=vim
+EDITOR=emacsclient
+VISUAL=emacsclient
 
 # prompt
 PS1_START="\[\033[1;30m\]\w\[\033[0;0m\]"
