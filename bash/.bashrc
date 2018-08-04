@@ -36,6 +36,15 @@ up() {
 		cd $path
 	fi
 }
+
+repo() {
+	StashFile="$HOME/.repo_list.txt"
+	if [ ! -f "$StashFile" ]; then
+		echo "recreating cache"
+		find ~/src -name '.git' -type d -print0 | xargs -0 -n1 dirname | sed "s#$HOME#~#" > "$StashFile"
+	fi
+	cd $(fzf <"$StashFile" | sed "s#~#$HOME#")
+}
 export FZF_DEFAULT_COMMAND='rg "." --hidden --follow -l --color=never -g ""'
 
 
