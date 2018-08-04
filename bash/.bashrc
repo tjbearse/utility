@@ -20,6 +20,7 @@ alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl
 alias ec='emacsclient'
 
 alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
+alias ec='emacsclient -n'
 
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
@@ -37,6 +38,16 @@ up() {
 		cd $path
 	fi
 }
+
+repo() {
+	StashFile="$HOME/.repo_list.txt"
+	if [ ! -f "$StashFile" ]; then
+		echo "recreating cache"
+		find ~/src -name '.git' -type d -print0 | xargs -0 -n1 dirname | sed "s#$HOME#~#" > "$StashFile"
+	fi
+	cd $(fzf <"$StashFile" | sed "s#~#$HOME#")
+}
+export FZF_DEFAULT_COMMAND='rg "." --hidden --follow -l --color=never -g ""'
 
 
 # should cd to current directory with -c or something

@@ -17,9 +17,13 @@
 [alias]
 	co = checkout
 	br = branch
-	ci = commit
 	st = status
 	cm = commit
+	a = add
 	branch-name= "!git rev-parse --abbrev-ref HEAD"
 	npush = "!git push -u origin $(git branch-name)"
 
+	f = "!git ls-files -m | sort -u | fzf -m"
+	cof = "!git co -- $(git f)"
+	af = "!git add -- $(git f)"
+	# cob = "!git co $(git for-each-ref --format='%(refname)' refs/heads | sed 's#^refs/\w\+/##' | sort -u | fzf)"

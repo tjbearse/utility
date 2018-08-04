@@ -6,7 +6,8 @@ filetype off " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
 set splitbelow
 set splitright
@@ -27,18 +28,19 @@ let g:ctrlp_working_path_mode = 'ra'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'mileszs/ack.vim'
-if executable('ag')
-	let g:ackprg = 'ag --vimgrep'
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+if executable('rg')
+	let g:ackprg = 'rg -s --vimgrep'
+	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 endif
 "ca Ack Ack!
 cnoreabbrev ag Ack!
 cnoreabbrev Ag Ack!
+cnoreabbrev rg Ack!
 
 
 Plugin 'airblade/vim-gitgutter'
 "avoid gutter popping in and out
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 
 " Git commands (G<something>)
 Plugin 'tpope/vim-fugitive'
@@ -61,18 +63,21 @@ Plugin 'ap/vim-css-color'
 
 Plugin 'easymotion/vim-easymotion'
 
-Bundle 'ervandew/supertab'
+" Bundle 'ervandew/supertab'
 
-Plugin 'SirVer/ultisnips'
+
+" Plugin 'Valloric/YouCompleteMe'
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Plugin 'SirVer/ultisnips'
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:UltiSnipsSnippetDirectories=$HOME.'/.vim.d/UltiSnips'
+let g:UltiSnipsSnippetsDir=$HOME.'/.vim.d/UltiSnips'
 
 " indents
 set shiftwidth=4
@@ -83,7 +88,8 @@ Plugin 'tpope/vim-sleuth' " indent
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'fatih/vim-go'
-Plugin 'mxw/vim-jsx'
+"Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
 
 Plugin 'scrooloose/syntastic'
 "" suggested starters
@@ -92,7 +98,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "" end suggestions
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = '~/bin/qualtrics/eslint-wrapper.sh'
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_go_check_on_open = 0
 let g:syntastic_go_checkers = ['go', 'gofmt', 'govet']
@@ -101,20 +108,24 @@ let g:syntastic_html_checkers=[]
 " Js formatting
 Plugin 'maksimr/vim-jsbeautify'
 
-Plugin 'chrisbra/csv.vim'
+" Plugin 'chrisbra/csv.vim' kind of annoying
 Plugin 'kshenoy/vim-signature'
+
 
 source ~/.vim.d/.vimrc_visual
 source ~/.vim.d/.vimrc_mapping
 
-function! FindConfig(prefix, what, where)
-	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-	return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-endfunction
-
-autocmd FileType javascript let b:syntastic_javascript_jhint_args = 
-			\ get(g:, 'syntastic_javascript_jhint_args', '') .
-			\ FindConfig('-c', '.jshintrc', expand('<afile>:p:h', 1))
+" function! FindConfig(prefix, what, where)
+" 	let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+" 	return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+" endfunction
+" 
+" autocmd FileType javascript let b:syntastic_javascript_jhint_args = 
+" 			\ get(g:, 'syntastic_javascript_jhint_args', '') .
+" 			\ FindConfig('-c', '.jshintrc', expand('<afile>:p:h', 1))
+" autocmd FileType javascript let b:syntastic_javascript_jscs = 
+" 			\ get(g:, 'syntastic_javascript_jscs_args', '') .
+" 			\ FindConfig('-c', '.jscs.json', expand('<afile>:p:h', 1))
 
 call vundle#end()            " required vundle
 filetype plugin indent on    " required vundle

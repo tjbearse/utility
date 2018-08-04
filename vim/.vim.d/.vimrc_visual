@@ -13,7 +13,9 @@ set laststatus=2
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'sunuslee/vim-plugin-random-colorscheme-picker'
+if has("gui_macvim")
+	Plugin 'sunuslee/vim-plugin-random-colorscheme-picker'
+endif
 "Plugin 'StanAngeloff/php.vim'
 
 "set background=dark

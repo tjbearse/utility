@@ -23,6 +23,7 @@ map E <leader>e
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType html vnoremap <buffer>  <c-f> :call RangeHtmlBeautify()<cr>
 
+let @s='"ay:Ag a'
 let @r=":! %"
 let @q='I"A",'
 
