@@ -24,6 +24,6 @@
 	npush = "!git push -u origin $(git branch-name)"
 
 	f = "!git ls-files -m | sort -u | fzf -m"
-	cof = "!git co -- $(git f)"
-	af = "!git add -- $(git f)"
+	cof = "!fn() { git co $@ -- $(git f); }; fn"
+	af = "!fn() { git add $@ -- $(git f); }; fn"
 	# cob = "!git co $(git for-each-ref --format='%(refname)' refs/heads | sed 's#^refs/\w\+/##' | sort -u | fzf)"
