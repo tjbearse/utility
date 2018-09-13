@@ -90,10 +90,11 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
 #+END_SRC
 * Indentation
 #+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode t)
 (setq tab-width 4)
-(setq js-indent-level 4)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
+(defvaralias 'js-indent-level 'tab-width)
 #+END_SRC
 * Linting
 #+BEGIN_SRC emacs-lisp
@@ -143,7 +144,14 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
     (setq x-select-enable-clipboard nil)
 #+END_SRC
 * File Finding
+** Projectile + Helm
 #+BEGIN_SRC emacs-lisp
+(use-package projectile
+:ensure t
+:diminish projectile-mode
+:config
+(setq projectile-project-search-path '("~/src/local" "~/src/personal"))
+)
 (use-package helm
   :ensure t
   :diminish helm-mode
@@ -155,26 +163,43 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
   (setq helm-buffer-max-length 40)
   (evil-define-key 'normal global-map (kbd "C-;") 'helm-M-x)
   )
+(use-package helm-ag
+:ensure t
+:config
+    (custom-set-variables
+    '(helm-ag-base-command "rg --no-heading"))
+)
+(use-package helm-projectile
+:ensure t
+:config
+    (helm-projectile-on)
+    (global-unset-key (kbd "s-p"))
+    (define-key evil-normal-state-map (kbd "s-p") 'projectile-commander)
 
-; fuzzy file finding, needs more ignores, doesn't respect .gitignore
-(use-package fiplr
-  :ensure t
-  ;:disabled t
-  :config
-  (global-set-key (kbd "C-x f") 'fiplr-find-file)
-  (setq fiplr-ignored-globs '((directories (".git" "node_modules" "bower_components"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
-  )
+    ;;; fix for extra ignore flag which helm-projectile adds by mistake
+    (defun helm-projectile-ag (&optional options)
+    "Helm version of projectile-ag."
+    (interactive (if current-prefix-arg (list (read-string "option: " "" 'helm-ag--extra-options-history))))
+    (if (require 'helm-ag nil  'noerror)
+        (if (projectile-project-p)
+            (let ((helm-ag-command-option options)
+                    (current-prefix-arg nil))
+                (helm-do-ag (projectile-project-root) (car (projectile-parse-dirconfig-file))))
+            (error "You're not in a project"))
+        (error "helm-ag not available")))
+)
 #+END_SRC
+*** TODO test file finding
+https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-file
 * Web
 #+BEGIN_SRC emacs-lisp
 (use-package rainbow-mode :ensure t)
 (use-package css-mode :ensure t)
 (use-package web-mode :ensure t)
+(use-package php-mode :ensure t)
 #+END_SRC
 * key binding
 #+BEGIN_SRC emacs-lisp
-(setq-default indent-tabs-mode t)
 (use-package key-chord
   :ensure t
   :config
@@ -183,6 +208,9 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-mode 1)
 )
+#+END_SRC
+** God mode
+#+BEGIN_SRC  emacs-lisp
 (use-package god-mode
 :ensure t
 )
@@ -193,6 +221,10 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
 (evil-define-key 'insert global-map (kbd "S-SPC") 'evil-execute-in-god-state)
 )
 #+END_SRC
+** TODO Easymotion
+speed up navigation within the buffer
+https://github.com/PythonNut/evil-easymotion
+
 * ETC
 #+BEGIN_SRC emacs-lisp
 (server-start)
@@ -213,9 +245,7 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
   :ensure t
   :defer t
   :config
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize))
-  )
+)
 
 
 
