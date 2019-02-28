@@ -7,7 +7,8 @@
 bower_components
 node_modules
 
-*.txt
+# *.txt
+.\#*
 
 # put personal scripts in this folder
 myscripts/*
