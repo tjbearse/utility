@@ -135,6 +135,7 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
 	flycheck-error-list-mode
 	git-rebase-mode))
     (add-to-list 'evil-emacs-state-modes mode))
+    (evil-define-key 'normal global-map (kbd "C-u") 'evil-scroll-up)
 
     (evil-mode 1)
 )
