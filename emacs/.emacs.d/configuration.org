@@ -14,6 +14,9 @@
 #+END_SRC
 
 * Visual Tweaks
+#+BEGIN_SRC emacs-lisp :results none
+(use-package rainbow-mode :ensure t)
+#+END_SRC
 ** Emacs vanilla changes
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-splash-screen t
@@ -34,7 +37,6 @@
 ;(setq whitespace-style (quote (face trailing tabs empty)))
 ;(global-whitespace-toggle-options)
 #+END_SRC
-
 ** Displays
 #+BEGIN_SRC emacs-lisp
 (use-package powerline
@@ -50,6 +52,24 @@
     `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
     `((".*" ,temporary-file-directory t)))
+#+END_SRC
+* Evil Mode
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+    :ensure t
+    :config
+    (dolist (mode '(ag-mode
+	flycheck-error-list-mode
+	git-rebase-mode))
+    (add-to-list 'evil-emacs-state-modes mode))
+    (evil-define-key 'normal global-map (kbd "C-u") 'evil-scroll-up)
+
+    (evil-mode 1)
+)
+#+END_SRC
+** Disable clipboard on select
+#+BEGIN_SRC emacs-lisp
+    (setq x-select-enable-clipboard nil)
 #+END_SRC
 * Org Mode
 ** Syntax highlighting on all these inline source blocks
@@ -70,7 +90,10 @@
         (org . t)
         (perl . t)
         (sh . t)
+        (plantuml . t)
 ))
+(setq org-plantuml-jar-path
+    (expand-file-name "~/util/plantuml.jar"))
 #+END_SRC
 *** test
 
@@ -91,10 +114,27 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
 * Indentation
 #+BEGIN_SRC emacs-lisp
 (setq-default indent-tabs-mode t)
-(setq tab-width 4)
+(setq-default tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 (defvaralias 'js-indent-level 'tab-width)
+#+END_SRC
+* Line wrapping
+#+BEGIN_SRC emacs-lisp :results none
+(setq-default truncate-lines t)
+(setq-default word-wrap t)
+#+END_SRC
+* Folding
+Not all of the fold behaviors are consistent with vim. Seems like case insensitivity on z commands, e.g. z R vs z r
+#+BEGIN_SRC emacs-lisp :results none
+(use-package origami
+:ensure t
+:diminish origami-mode
+:config
+    (define-key evil-normal-state-map (kbd "z v") 'origami-show-node)
+    (define-key evil-normal-state-map (kbd "z V") 'origami-show-only-node)
+    (global-origami-mode)
+)
 #+END_SRC
 * Linting
 #+BEGIN_SRC emacs-lisp
@@ -125,24 +165,6 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
           (setq-local flycheck-javascript-eslint-executable eslint))))
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 )
-#+END_SRC
-* Evil Mode
-#+BEGIN_SRC emacs-lisp
-(use-package evil
-    :ensure t
-    :config
-    (dolist (mode '(ag-mode
-	flycheck-error-list-mode
-	git-rebase-mode))
-    (add-to-list 'evil-emacs-state-modes mode))
-    (evil-define-key 'normal global-map (kbd "C-u") 'evil-scroll-up)
-
-    (evil-mode 1)
-)
-#+END_SRC
-** Disable clipboard on select
-#+BEGIN_SRC emacs-lisp
-    (setq x-select-enable-clipboard nil)
 #+END_SRC
 * File Finding
 ** Projectile + Helm
@@ -192,12 +214,12 @@ Allow dates before 1970 (nice for D&D story dates). May cause issues on systems 
 #+END_SRC
 *** TODO test file finding
 https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-file
-* Web
+* Languages
 #+BEGIN_SRC emacs-lisp
-(use-package rainbow-mode :ensure t)
 (use-package css-mode :ensure t)
 (use-package web-mode :ensure t)
 (use-package php-mode :ensure t)
+(use-package go-mode :ensure t)
 #+END_SRC
 * key binding
 #+BEGIN_SRC emacs-lisp
@@ -222,16 +244,45 @@ https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-fil
 (evil-define-key 'insert global-map (kbd "S-SPC") 'evil-execute-in-god-state)
 )
 #+END_SRC
-** TODO Easymotion
+** Easymotion
 speed up navigation within the buffer
 https://github.com/PythonNut/evil-easymotion
+#+BEGIN_SRC emacs-lisp :results none
+(use-package evil-easymotion
+    :ensure t
+    :config
 
-* ETC
-#+BEGIN_SRC emacs-lisp
-(server-start)
-(use-package go-mode
-:ensure t
+    ;; similar to 'evilem-motion-find-char but does not break lines
+    (evilem-make-motion evilem-motion-find-char-line #'evil-repeat-find-char
+        :pre-hook (save-excursion
+            (setq evil-this-type 'inclusive)
+            (call-interactively #'evil-find-char))
+    )
+    (evilem-make-motion evilem-motion-find-char-to-line #'evil-repeat-find-char
+        :pre-hook (save-excursion
+            (setq evil-this-type 'inclusive)
+            (call-interactively #'evil-find-char-to))
+    )
+    (evilem-make-motion evilem-motion-find-char-to-backward-line #'evil-repeat-find-char
+        :pre-hook (save-excursion
+            (setq evil-this-type 'inclusive)
+            (call-interactively #'evil-find-char-to-backward))
+    )
+    (evilem-make-motion evilem-motion-find-char-backward-line #'evil-repeat-find-char
+        :pre-hook (save-excursion
+            (setq evil-this-type 'inclusive)
+            (call-interactively #'evil-find-char-backward))
+    )
+    (evil-global-set-key 'normal (kbd "f") 'evilem-motion-find-char-line)
+    (evil-global-set-key 'normal (kbd "t") 'evilem-motion-find-char-to-line)
+    (evil-global-set-key 'normal (kbd "F") 'evilem-motion-find-char-backward-line)
+    (evil-global-set-key 'normal (kbd "T") 'evilem-motion-find-char-to-backward-line)
+    (evil-global-set-key 'normal (kbd "DEL") evilem-map)
 )
+#+END_SRC
+* ETC
+#+BEGIN_SRC emacs-lisp :results none
+(server-start)
 
 (use-package yasnippet
   :ensure t
@@ -240,12 +291,13 @@ https://github.com/PythonNut/evil-easymotion
   (yas-global-mode 1)
   (setq yas-snippet-dirs
         "~/.my-config/emacs/snippets")
-  )
+        )
 
 (use-package exec-path-from-shell
+  :if (eq system-type 'darwin)
   :ensure t
-  :defer t
   :config
+  (exec-path-from-shell-initialize)
 )
 
 
@@ -256,6 +308,8 @@ https://github.com/PythonNut/evil-easymotion
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ 
+ ;; TODO select a theme, Leuven is cool with the font changes for org mode, a dark version would be good
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (wombat)))
@@ -267,6 +321,3 @@ https://github.com/PythonNut/evil-easymotion
  ;; If there is more than one, they won't work right.
  )
 #+END_SRC
-  
-  
-
