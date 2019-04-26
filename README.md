@@ -3,5 +3,6 @@ utility
 
 Some of my settings and scripts for storage and sharing purposes
 
-pull this first: https://gist.github.com/39cc41a9837e7de42258.git
-run pull_config.sh to setup root tracking with git info in folder
+1. Install "stow"
+2. Clone this repo somewhere (no longer has to be under home)
+3. From this directory run "./install.sh" and follow instructions
