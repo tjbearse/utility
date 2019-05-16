@@ -1,5 +1,5 @@
 [user]
-	email = thomasb@qualtrics.com
+	email = bearse.thomas@gmail.com
 	name = TJ Bearse
 [push]
 	default = simple
@@ -27,3 +27,5 @@
 	cof = "!fn() { git co $@ -- $(git f); }; fn"
 	af = "!fn() { git add $@ -- $(git f); }; fn"
 	# cob = "!git co $(git for-each-ref --format='%(refname)' refs/heads | sed 's#^refs/\w\+/##' | sort -u | fzf)"
+[url "git@github.com:"]
+	insteadOf = https://github.com
