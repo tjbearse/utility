@@ -1,1 +1,3 @@
-source ~/.vim.d/.vimrc
+
+inoremap jj <Esc>
+""" source ~/.vim.d/.vimrc

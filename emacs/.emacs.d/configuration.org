@@ -221,6 +221,9 @@ https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-fil
 (use-package php-mode :ensure t)
 (use-package go-mode :ensure t)
 (use-package csharp-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode))
+(setq web-mode-content-types-alist '(("jsx" . "\\.[jt]s[x]?\\'")))
 #+END_SRC
 * key binding
 #+BEGIN_SRC emacs-lisp
