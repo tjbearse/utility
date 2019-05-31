@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	editor = vim
+	editor = emacsclient -a '' --tty
 	excludesfile = /Users/ThomasB/.gitignore_global
 [color]
 	ui = true

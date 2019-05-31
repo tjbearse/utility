@@ -11,7 +11,7 @@
  '(helm-ag-base-command "rg --no-heading")
  '(package-selected-packages
    (quote
-    (org evil-god-state god-mode fiplr web-mode use-package evil))))
+	(csharp-mode org evil-god-state god-mode fiplr web-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

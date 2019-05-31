@@ -89,7 +89,7 @@
         (js . t)
         (org . t)
         (perl . t)
-        (sh . t)
+        (shell . t)
         (plantuml . t)
 ))
 (setq org-plantuml-jar-path
@@ -220,6 +220,7 @@ https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-fil
 (use-package web-mode :ensure t)
 (use-package php-mode :ensure t)
 (use-package go-mode :ensure t)
+(use-package csharp-mode :ensure t)
 #+END_SRC
 * key binding
 #+BEGIN_SRC emacs-lisp
@@ -282,7 +283,7 @@ https://github.com/PythonNut/evil-easymotion
 #+END_SRC
 * ETC
 #+BEGIN_SRC emacs-lisp :results none
-(server-start)
+;; (server-start)
 
 (use-package yasnippet
   :ensure t

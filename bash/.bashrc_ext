@@ -17,19 +17,13 @@ alias qdate='date +%Y-%m-%d'
 alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 
-alias ec='emacsclient'
 
 alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
 
 # EDITOR aliases
-# TODO these should be moved to path so that I can use them with git, etc
-# TODO these should setup the server if its not there. -a "" does this but it will never do graphical. Maybe start like 'emacs $@ >/dev/null 2>/dev/null &' in that case
-# send to an existing server, don't wait (relevant if gui)
-alias em='emacsclient -n'
-# blocking edit on an existing server, will go to gui if that's where the server is
-alias ec='emacsclient'
-# blocking edit on an existing server, will go term always
-alias ect='emacsclient -t'
+alias ec='emacsclient -a ""'
+alias ecg='emacsclient -a "" -c'
+alias ect='emacsclient -a "" --tty'
 # should cd to current directory with -c or something
 VISUAL=ec
 EDITOR=ect
