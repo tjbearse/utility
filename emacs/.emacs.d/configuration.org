@@ -63,10 +63,12 @@
 	git-rebase-mode))
     (add-to-list 'evil-emacs-state-modes mode))
     (evil-define-key 'normal global-map (kbd "C-u") 'evil-scroll-up)
-
+    (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
+    (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
     (evil-mode 1)
 )
 #+END_SRC
+
 ** Disable clipboard on select
 #+BEGIN_SRC emacs-lisp
     (setq x-select-enable-clipboard nil)
@@ -173,7 +175,7 @@ Not all of the fold behaviors are consistent with vim. Seems like case insensiti
 :ensure t
 :diminish projectile-mode
 :config
-(setq projectile-project-search-path '("~/src/local" "~/src/personal"))
+(setq projectile-project-search-path '("~/src"))
 )
 (use-package helm
   :ensure t

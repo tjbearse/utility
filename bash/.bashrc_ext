@@ -22,7 +22,7 @@ alias pbcopyhtml='textutil -stdin -format html -convert rtf -stdout | pbcopy'
 
 # EDITOR aliases
 alias ec='emacsclient -a ""'
-alias ecg='emacsclient -a "" -c'
+alias ecg='emacsclient -cna ""'
 alias ect='emacsclient -a "" --tty'
 # should cd to current directory with -c or something
 VISUAL=ec
