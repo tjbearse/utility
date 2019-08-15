@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: monobehaviour
+# key: mono
+# --
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class $1 : MonoBehaviour {
+    void Start() {
+    }
+}
