@@ -300,9 +300,10 @@ https://github.com/PythonNut/evil-easymotion
   :diminish yas-mode
   :config
   (yas-global-mode 1)
-  (setq yas-snippet-dirs
-        "~/emacs.d/snippets")
-        )
+  (setq yas-snippet-dirs '(
+    "~/emacs.d/snippets"
+  ))
+)
 
 (use-package exec-path-from-shell
   :if (eq system-type 'darwin)
