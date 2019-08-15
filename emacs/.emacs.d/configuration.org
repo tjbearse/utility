@@ -1,6 +1,11 @@
 #+TITLE: Emacs Configuration
   This an org mode file that documents my emacs config. The code within is extracted and run by .emacs
 * Package Manager (use-package)
+https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
+#+BEGIN_SRC emacs-lisp
+; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -296,7 +301,7 @@ https://github.com/PythonNut/evil-easymotion
   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs
-        "~/.my-config/emacs/snippets")
+        "~/emacs.d/snippets")
         )
 
 (use-package exec-path-from-shell

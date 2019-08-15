@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # run from this configuration directory
 
