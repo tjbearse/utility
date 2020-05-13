@@ -1,0 +1,49 @@
+inoremap jj <Esc>
+
+set splitbelow
+set splitright
+set incsearch
+set cursorline
+set ignorecase
+set smartcase
+set autoindent
+set autoread
+set foldmethod=indent
+set nofoldenable
+set shiftwidth=4
+set tabstop=4
+set noexpandtab
+
+nnoremap <C-p> :vsc MonoDevelop.Ide.Commands.SearchCommands.GotoFile <CR>
+nnoremap gu :vsc MonoDevelop.Refactoring.RefactoryCommands.FindReferences <CR>
+nnoremap gh :vsc MonoDevelop.Ide.Commands.TextEditorCommands.ShowQuickInfo <CR> " <-- Show tooltip without mouse
+nnoremap gb :vsc MonoDevelop.RefactoryCommands.NavigationCommands.FindBaseSymbols <CR>
+nnoremap <C-w>o :vsc MonoDevelop.Ide.Commands.FileTabCommands.CloseAllButThis <CR>
+
+noremap j gj
+noremap k gk
+
+inoremap <c-s> <Esc>:wq
+noremap <c-s> <Esc>:wq
+
+set backspace=indent,eol,start
+let mapleader=" "
+let @q='I"A",'
+
+set hlsearch " makes highlight show up on search
+set list
+set listchars=tab:·\ ,trail:«"makes tabs show as "·    "
+
+"syntax on
+set number
+" line numbers are relative to current line, not absolute
+" http://vim.wikia.com/wiki/Display_line_numbers
+set relativenumber
+
+set laststatus=2
+
+" hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE " http://vim.wikia.com/wiki/Display_line_numbers
+" hi Folded guibg=grey10 guifg=grey50
+" hi SpecialKey ctermfg=darkgray guifg=gray35
+" highlight Cursor guifg=white guibg=gray
+" highlight iCursor guifg=white guibg=gray
