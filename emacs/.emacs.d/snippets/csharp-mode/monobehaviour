@@ -7,7 +7,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class $1 : MonoBehaviour {
-    void Start() {
-    }
+namespace $1 {
+
+	public class ${2:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} : MonoBehaviour {
+		$3
+	}
+
 }

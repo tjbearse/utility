@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: interface
+# key: interface
+# --
+public interface I$1 {
+}

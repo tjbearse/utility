@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: MenuItem
+# key: menu
+# --
+[MenuItem("${1:MyMenu/Do Something}")]
+static void ${2:DoSomething}() {
+	${3:Debug.Log("Doing Something...");}
+}
