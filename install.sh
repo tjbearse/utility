@@ -9,6 +9,8 @@ cd $install_dir
 
 echo "lifting dot files to home"
 stow -t "$target_dir" bash emacs git python vim tmux
+echo "lifting dot files to .config"
+stow -t "$target_dir/.config" config
 
 if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
 	echo "ssh key found, skipping that setup"
