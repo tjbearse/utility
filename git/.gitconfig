@@ -5,7 +5,7 @@
 	default = simple
 [core]
 	editor = emacsclient -a '' --tty
-	excludesfile = /Users/ThomasB/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [color]
 	ui = true
 [difftool "sourcetree"]
@@ -29,3 +29,5 @@
 	# cob = "!git co $(git for-each-ref --format='%(refname)' refs/heads | sed 's#^refs/\w\+/##' | sort -u | fzf)"
 [url "git@github.com:"]
 	insteadOf = https://github.com
+[init]
+	defaultBranch = main
