@@ -48,7 +48,7 @@ up() {
 export FZF_DEFAULT_COMMAND='rg "." --hidden --follow -l --color=never -g ""'
 
 # prompt
-PS1_START="\[\033[1;30m\]\w\[\033[0;0m\]"
+PS1_START="\[\033[2;37m\]\w\[\033[0;0m\]"
 PS1_END="\[\033[0;0m\]\u \[\033[0;44m\]\[\033[1;33m\]$\[\033[0;0m\] "
 PS1="$PS1_START\n$PS1_END"
 
