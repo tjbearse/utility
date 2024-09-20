@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: unittest file
+# key: unittest
+# --
+import unittest
+
+class Test${1:StringMethods}(unittest.TestCase):
+
+    def test_${2:upper}(self):
+        ${3:self.assertEqual('foo'.upper(), 'FOO')}
+
+if __name__ == '__main__':
+    unittest.main()

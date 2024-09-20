@@ -18,6 +18,8 @@ venv/*
 *.pyc
 .\#*
 
+.vscode
+
 # https://help.github.com/articles/ignoring-files/
 #
 # Compiled source #

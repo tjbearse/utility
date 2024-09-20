@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	editor = emacsclient -a '' --tty
+	editor = vi
 	excludesfile = ~/.gitignore_global
 [color]
 	ui = true

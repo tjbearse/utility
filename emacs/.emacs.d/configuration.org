@@ -2,19 +2,20 @@
   This an org mode file that documents my emacs config. The code within is extracted and run by .emacs
 * Package Manager (use-package)
 https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-(require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(unless (package-installed-p 'use-package)
+#+BEGIN_SRC emacs-lisp :results none
+  (require 'package)
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+  (unless (package-installed-p 'use-package)
     (package-refresh-contents)
-        (package-install 'use-package))
-(eval-when-compile
+    (package-install 'use-package))
+  (eval-when-compile
     (require 'use-package))
 #+END_SRC
 
@@ -23,7 +24,7 @@ https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
 (use-package rainbow-mode :ensure t)
 #+END_SRC
 ** Emacs vanilla changes
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq inhibit-splash-screen t
     inhibit-startup-message t
     inhibit-startup-echo-area-message t)
@@ -38,12 +39,12 @@ https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
 (setq-default indicate-empty-lines t)
 #+END_SRC
 *** Whitesapce
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 ;(setq whitespace-style (quote (face trailing tabs empty)))
 ;(global-whitespace-toggle-options)
 #+END_SRC
 ** Themes 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package solarized-theme :ensure t)
 (setq solarized-scale-org-headlines nil)
 ;(load-theme 'solarized-light t)
@@ -53,7 +54,7 @@ https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
 #+RESULTS:
 
 ** Displays
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package powerline
     :ensure t
     :config
@@ -62,40 +63,41 @@ https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
 (use-package git-gutter-fringe :ensure t)
 #+END_SRC
 * Backups, auto save
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq backup-directory-alist
     `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
     `((".*" ,temporary-file-directory t)))
 #+END_SRC
 * Evil Mode
-#+BEGIN_SRC emacs-lisp
-(use-package evil
+#+BEGIN_SRC emacs-lisp :results none
+  (use-package evil
     :ensure t
     :config
     (dolist (mode '(ag-mode
-	flycheck-error-list-mode
-	git-rebase-mode))
-    (add-to-list 'evil-emacs-state-modes mode))
+                    flycheck-error-list-mode
+                    git-rebase-mode))
+      (add-to-list 'evil-emacs-state-modes mode))
     (evil-define-key 'normal global-map (kbd "C-u") 'evil-scroll-up)
     (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
     (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
+    (customize-save-variable evil-undo-system 'undo-redo)
     (evil-mode 1)
-)
+    )
 #+END_SRC
 
 ** Disable clipboard on select
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
     (setq x-select-enable-clipboard nil)
 #+END_SRC
 * Org Mode
 ** Syntax highlighting on all these inline source blocks
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq org-src-fontify-natively t)
 #+END_SRC
 ** Run all kinds of code
    [[http://orgmode.org/manual/Languages.html][languages list]]
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (org-babel-do-load-languages
       'org-babel-load-languages
       '(
@@ -116,7 +118,7 @@ https://www.reddit.com/r/emacs/comments/cdf48c/failed_to_download_gnu_archive/
 
 ** Visual Settings
 Auto indent and minimize bullets
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq org-startup-indented t)
 (use-package ox-twbs :ensure t)
 (use-package htmlize :ensure t)
@@ -125,7 +127,7 @@ Auto indent and minimize bullets
 Add the custom drawername "DRAWER" (broke with org 9.0)
 
 Allow dates before 1970 (nice for D&D story dates). May cause issues on systems that can't support these dates.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (setq org-read-date-force-compatible-dates nil)
 #+END_SRC
 * Indentation
@@ -156,40 +158,40 @@ Not all of the fold behaviors are consistent with vim. Seems like case insensiti
 )
 #+END_SRC
 * Linting
-#+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :ensure t
-  :diminish flycheck-mode
-  :config
-  (global-flycheck-mode)
-  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-  (setq-default flycheck-temp-prefix ".flycheck")
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (setq-default flycheck-disabled-checkers
-      (append flycheck-disabled-checkers
-          '(javascript-jshint)))
-  (setq-default flycheck-disabled-checkers
-      (append flycheck-disabled-checkers
-          '(json-jsonlist)))
-  ;; use local eslint from node_modules before global
-  ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-  (defun my/use-eslint-from-node-modules ()
+#+BEGIN_SRC emacs-lisp :results none
+  (use-package flycheck
+    :ensure t
+    :diminish flycheck-mode
+    :config
+    (global-flycheck-mode)
+    (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+    (setq-default flycheck-temp-prefix ".flycheck")
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint)))
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(json-jsonlist)))
+    ;; use local eslint from node_modules before global
+    ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+    (defun my/use-eslint-from-node-modules ()
       (let* ((root (locate-dominating-file
-                      (or (buffer-file-name) default-directory)
-                      "node_modules"))
-              (eslint (and root
+                    (or (buffer-file-name) default-directory)
+                    "node_modules"))
+             (eslint (and root
                           (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                              root))))
-          (when (and eslint (file-executable-p eslint))
+                                            root))))
+        (when (and eslint (file-executable-p eslint))
           (setq-local flycheck-javascript-eslint-executable eslint))))
-  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-  (add-hook 'c++-mode-hook
-    (lambda () (setq flycheck-clang-language-standard "c++11")))
-)
+    (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+    (add-hook 'c++-mode-hook
+              (lambda () (setq flycheck-clang-language-standard "c++11")))
+  )
 #+END_SRC
 * File Finding
 ** Projectile + Helm
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package projectile
 :ensure t
 :diminish projectile-mode
@@ -207,7 +209,7 @@ Not all of the fold behaviors are consistent with vim. Seems like case insensiti
   (setq helm-autoresize-mode t)
   (setq helm-buffer-max-length 40)
   (evil-define-key 'normal global-map (kbd "C-;") 'helm-M-x)
-  )
+
 (use-package helm-ag
 :ensure t
 :diminish helm-ag
@@ -220,7 +222,7 @@ Not all of the fold behaviors are consistent with vim. Seems like case insensiti
 :diminish helm-projectile
 :config
     (helm-projectile-on)
-    ;;;(global-unset-key (kbd "s-p")) 
+    ;;(global-unset-key (kbd "s-p")) 
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-commander)
 
     ;;; fix for extra ignore flag which helm-projectile adds by mistake
@@ -234,12 +236,21 @@ Not all of the fold behaviors are consistent with vim. Seems like case insensiti
                 (helm-do-ag (projectile-project-root) (car (projectile-parse-dirconfig-file))))
             (error "You're not in a project"))
         (error "helm-ag not available")))
+
+    ;;; add new commands to commander
+    (def-projectile-commander-method ?F
+        "Find file under cursor."
+        (helm-projectile-find-file-dwim))
+    (def-projectile-commander-method ?c
+        "Compile project."
+        (projectile-compile-project nil))
+    )
 )
 #+END_SRC
 *** TODO test file finding
 https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-file
 * Completion
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package company
     :ensure t
     :config
@@ -248,70 +259,79 @@ https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-fil
 )
 #+END_SRC
 * Languages
-#+BEGIN_SRC emacs-lisp
-(use-package css-mode :ensure t)
-(use-package web-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package go-mode :ensure t)
-(use-package fsharp-mode :ensure t)
-(use-package csharp-mode
+#+BEGIN_SRC emacs-lisp :results none
+  (use-package css-mode :ensure t)
+  (use-package haskell-mode :ensure t)
+  (use-package web-mode :ensure t)
+  (use-package php-mode :ensure t)
+  (use-package go-mode :ensure t)
+  (use-package fsharp-mode :ensure t)
+  (use-package csharp-mode
     :ensure t
     :config
-        ;(add-hook 'csharp-mode-hook 'omnisharp-mode)
-        (add-hook 'csharp-mode-hook #'company-mode)
-)
-(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode))
-(setq web-mode-content-types-alist '(("jsx" . "\\.[jt]s[x]?\\'")))
+                                          ;(add-hook 'csharp-mode-hook 'omnisharp-mode)
+    (add-hook 'csharp-mode-hook #'company-mode)
+    )
+  (use-package fountain-mode :ensure t)
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode))
+  (setq web-mode-content-types-alist '(("jsx" . "\\.[jt]s[x]?\\'")))
 #+END_SRC
 ** Language Server (LSP Mode)
-#+BEGIN_SRC emacs-lisp
-;; old csharp config
-;; (use-package omnisharp
-;;     ; :ensure t
-;;     :config
-;;         (add-to-list 'company-backends 'company-omnisharp)
-;; )
+#+BEGIN_SRC emacs-lisp :results none
+  ;; old csharp config
+  ;; (use-package omnisharp
+  ;;     ; :ensure t
+  ;;     :config
+  ;;         (add-to-list 'company-backends 'company-omnisharp)
+  ;; )
 
-;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-(setq lsp-keymap-prefix "s-l")
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "s-l")
 
-(use-package lsp-mode
-    :ensure t
-    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-            (fsharp-mode . lsp)
-            ;; (csharp-mode . lsp)  ;; this is bugging out right now
-            ;; if you want which-key integration
-            (lsp-mode . lsp-enable-which-key-integration)
-    )
-    :commands lsp
-)
+  (use-package lsp-mode
+      :ensure t
+      ;; 1/2/2022: hook is causing a loop of triggering lsp-mode?
+      ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+      ;;         ;; (fsharp-mode . lsp)
+      ;;         ;; (web-mode . lsp)
+      ;;         ;; (csharp-mode . lsp)  ;; this is bugging out right now
+      ;;         ;; if you want which-key integration
+      ;;         ;; (lsp-mode . #'lsp-enable-which-key-integration)
+      ;; )
+      :config
+      :commands lsp
+  )
 
-;; optionally
-(use-package lsp-ui
-    :commands lsp-ui-mode
-    :ensure t
-)
-;; if you are helm user
-(use-package helm-lsp
-    :commands helm-lsp-workspace-symbol
-    :ensure t
-)
-;; if you are ivy user
-;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-;;(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  (use-package lsp-pyright
+      :ensure t
+      :hook (python-mode . (lambda ()
+          (require 'lsp-pyright)
+          (lsp))))  ; or lsp-deferred  ;; optionally
+  (use-package lsp-ui
+      :commands lsp-ui-mode
+      :ensure t
+  )
+  ;; if you are helm user
+  (use-package helm-lsp
+      :commands helm-lsp-workspace-symbol
+      :ensure t
+  )
+  ;; if you are ivy user
+  ;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  ;;(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-;; optionally if you want to use debugger
-;; (use-package dap-mode)
-;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+  ;; optionally if you want to use debugger
+  ;; (use-package dap-mode)
+  ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-;; optional if you want which-key integration
-;;(use-package which-key :config (which-key-mode))
+  ;; optional if you want which-key integration
+  (use-package which-key)
 
 #+END_SRC
 
 * key binding
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results none
 (use-package key-chord
   :ensure t
   :config
@@ -325,7 +345,7 @@ https://stackoverflow.com/questions/35805591/how-to-use-projectile-find-test-fil
 )
 #+END_SRC
 ** God mode
-#+BEGIN_SRC  emacs-lisp
+#+BEGIN_SRC  emacs-lisp :results none
 ;; (use-package god-mode
 ;; :ensure t
 ;; )

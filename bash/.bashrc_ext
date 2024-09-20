@@ -2,18 +2,18 @@
 # holds some personlizations separated for portablility
 
 #common aliases
-#alias ls="ls --color=auto"
+alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 #alias ls="ls -h"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias mvim='open -a MacVim'
 alias chrome='open -a Google\ Chrome'
 alias qfind='find . -iname'
 alias qdate='date +%Y-%m-%d'
 
+alias ssh='TERM=xterm-color ssh'
 alias curlt='curl -w "@$(dirname ~/util/curl-time.txt)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 alias curltcsv='curl -w "@$(dirname ~/util/curl-time.tsv)/$(basename ~/util/curl-time.txt)" -o /dev/null'
 
@@ -25,8 +25,8 @@ alias ec='emacsclient -a ""'
 alias ecg='emacsclient -cna ""'
 alias ect='emacsclient -a "" --tty'
 # should cd to current directory with -c or something
-VISUAL=ec
-EDITOR=ect
+VISUAL=vi
+EDITOR=vi
 
 # python autocomplete
 export PYTHONSTARTUP=~/.pythonrc
